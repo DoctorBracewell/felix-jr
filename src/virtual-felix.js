@@ -7,7 +7,7 @@ discordClient.on('ready', () => {
   });
 
 setInterval(() => {
-    let num = random.randomBetween(0, 500);
+    let num = random.randomBetween(0, 1000);
     if (num === 1) {
         discordClient.guilds.get("612778224887267342").channels.get("618186163353813019").send(random.randomFromArray(config.jokes))
     }
