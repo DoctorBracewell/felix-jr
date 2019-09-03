@@ -29,7 +29,9 @@ discordClient.on('message', message => {
             message.channel.send("I am the Lorax I speak for the trees, save the Amazon or I’ll break your knees.")
         } if (message.content.toLowerCase().includes("drug")) {
             message.channel.send("*DRUGS* ARI NO")
-        }
+        } if (message.content.toLowerCase().includes("luranixl")) {
+          message.channel.send("***TRIPPY SEXY GODDESSES***")
+      }
     }
 
     let args = message.content.toLowerCase().slice(prefix.length).split(/ +/);
