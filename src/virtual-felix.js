@@ -210,7 +210,7 @@ discordClient.on('message', message => {
                         .setAuthor("Felix Jr.")
                         .setTitle(`**Contest Results**`)
                         .setDescription("Thanks for participating!")
-                        .setFooter("Use vr!trivia to start another contest.")
+                        .setFooter("Use $trivia to start another contest.")
                         .setTimestamp()
                         .addField("Leaderboard:", sortContestants())
                       );
