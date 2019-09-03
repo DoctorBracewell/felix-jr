@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.1",
-    "drbracewell-random-tools": "^1.2.2"
+    "drbracewell-random-tools": "^1.2.2",
+    "node-fetch": "^2.6.0"
   }
 }
