@@ -35,6 +35,8 @@ discordClient.on('message', message => {
           message.channel.send("No Grey, blood does *not* make the cookies taste better.")
         } if (message.content.toLowerCase().includes("leo")) {
           message.channel.send("*absolute sweetheart")
+        } if (message.content.toLowerCase().includes("merlin")) {
+          message.channel.send("*baby wizard")
         }
     }
 
