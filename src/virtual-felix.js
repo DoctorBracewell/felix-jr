@@ -37,6 +37,8 @@ discordClient.on('message', message => {
           message.channel.send("*absolute sweetheart")
         } if (message.content.toLowerCase().includes("merlin")) {
           message.channel.send("*baby wizard")
+        } if (message.content.toLowerCase().includes("felix jr")) {
+          message.channel.send("That's Me!")
         }
     }
 
