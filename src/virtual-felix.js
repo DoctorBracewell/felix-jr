@@ -39,6 +39,8 @@ discordClient.on('message', message => {
           message.channel.send("*baby wizard")
         } if (message.content.toLowerCase().includes("felix jr")) {
           message.channel.send("That's Me!")
+        } if (message.content.toLowerCase().includes("bastard")) {
+          message.channel.send("*chaptic bastard*")
         }
     }
 
