@@ -33,7 +33,7 @@ discordClient.on('message', message => {
           message.channel.send("***TRIPPY SEXY GODDESSES***")
         } if (message.content.toLowerCase().includes("blood") && message.content.toLowerCase().includes("cookie")) {
           message.channel.send("No Grey, blood does *not* make the cookies taste better.")
-        } if (message.content.toLowerCase().includes("lea")) {
+        } if (message.content.toLowerCase().includes("leo")) {
           message.channel.send("*absolute sweetheart")
         }
     }
