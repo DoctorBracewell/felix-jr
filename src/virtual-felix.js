@@ -14,7 +14,7 @@ setInterval(() => {
 }, 1000)
 
 discordClient.on('guildMemberAdd', member => {
-  member.guild.channels.get('612778224887267344').send(`Welcome <!${member.id}>! Check out <#612813188077191199>. When you're ready, post in <#612779316438237211> and <#612800612752424961>. Have any questions? Ask around or tag a mod, and let a mod (name in purple writing) know if you have pronouns you want added to your name or a colour. Enjoy!`); 
+  member.guild.channels.get('612778224887267344').send(`Welcome <@${member.id}>! Check out <#612813188077191199>. When you're ready, post in <#612779316438237211> and <#612800612752424961>. Have any questions? Ask around or tag a mod, and let a mod (name in purple writing) know if you have pronouns you want added to your name or a colour. Enjoy!`); 
 });
 
 discordClient.on('message', message => {
