@@ -22,7 +22,7 @@ discordClient.on('message', message => {
         message.channel.send("Pong!")
     }
 
-    if (!message.author.bot) {
+    if (!message.author.bot && message.channel.id == "618186163353813019") {
         if (message.content.toLowerCase().includes("vitamin")) {
             message.channel.send("What the FUCK is a vitamin.")
         } if (message.content.toLowerCase().includes("autocorrect")) {
