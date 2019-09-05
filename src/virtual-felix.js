@@ -45,6 +45,8 @@ discordClient.on('message', message => {
           message.channel.send("That's Me!")
         } if (message.content.toLowerCase().includes("bastard")) {
           message.channel.send("*chaptic bastard*")
+        } if (message.content.toLowerCase().includes("spaghetti")) {
+          message.channel.send("**SPAGHETTI ROMANCE**")
         }
     }
 
