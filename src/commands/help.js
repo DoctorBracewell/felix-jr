@@ -3,7 +3,7 @@ module.exports = {
   description: "Provides this message.",
   arguments: "",
 	execute(message, args, Discord) {
-    const fs = require("fs"), commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.js')), random = require("drbracewell-random-tools")
+    const fs = require("fs"), commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js')), random = require("drbracewell-random-tools")
     let commands = [];
 
     for (const file of commandFiles) {
@@ -43,7 +43,7 @@ module.exports = {
 
     const help = new Discord.RichEmbed()
         .setColor(random.randomColour())
-        .setAuthor("Felix Jr.")
+        .setAuthor("Felix Jr.", "https://imgur.com/gZcXYFj.png")
         .setTitle("**Hello!**")
         .setDescription("I am Felix Jr., a custom discord bot coded by DrBracewell. I post random memes,  Check below for some commands you can use.")
         .addField("__Commands__", helpString())

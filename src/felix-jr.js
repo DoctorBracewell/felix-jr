@@ -1,9 +1,9 @@
-const tokens = require("./json/tokens.json"), config = require("./config.json"), prefix = config.prefix;
-const fs = require("fs")
+const tokens = require("./json/tokens.json"), config = require("./json/config.json"), prefix = config.prefix;
+const fs = require("fs"), random = require("drbracewell-random-tools")
 
 const Discord = require('discord.js'), discordClient = new Discord.Client();
 discordClient.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./src/commands')
+const commandFiles = fs.readdirSync('./commands')
 
 for (const file of commandFiles) {
 	let command = require(`./commands/${file}`);

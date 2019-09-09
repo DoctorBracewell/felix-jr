@@ -3,7 +3,8 @@ module.exports = {
   description: "Starts a trivia contest.",
   arguments: "easy medium hard",
 	execute(message, args, Discord) {
-        const content = require("../json/content.json"), random = require("drbracewell-random-tools"), fetch = require("node-fetch")
+        const random = require("drbracewell-random-tools"), fetch = require("node-fetch")
+
         if (args.length === 0) {
           message.channel.send("Please provide a difficulty, `easy`, `medium` or `hard`.");
           return;
@@ -12,14 +13,14 @@ module.exports = {
         let questionNumber = 0, contestants = [], questionEmbed, randomQuestion = {}, randomChoices = [], 
             shuffledAnswer = 0, choicesString = ``, leaderboard = [], list = []
 
-        if (!(["easy","medium","hard"].includes(args[1])) || args.length < 2) {
+        if (!(["easy","medium","hard"].includes(args[0]))) {
           message.channel.send("That is not a valid contest difficulty, use `easy`, `medium` or `hard`.");
           return;
         }
 
         let url = "https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986";
-        if(args.length === 2) {
-          switch (args[1]) {
+        if(args.length === 1) {
+          switch (args[0]) {
             case "easy":
               url += "&difficulty=easy";
               break;

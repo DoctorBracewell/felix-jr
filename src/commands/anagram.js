@@ -3,7 +3,7 @@ module.exports = {
     description: "Starts a anagram contenst",
     arguments: "easy hard",
     execute(message, args, Discord) {
-        const randomWord = require("random-word"), random = require("drbracewell-random-tools");
+        const randomWord = require("random-words"), random = require("drbracewell-random-tools");
         let word = randomWord();
 
         if (args === [] || !["easy", "hard"].includes(args[0])) {
@@ -25,7 +25,6 @@ module.exports = {
 
         let embed = new Discord.RichEmbed()
           .setColor(random.randomColour())
-          .setAuthor("Felix Jr.")
           .setTitle("**Race to see who can unscramble the word below first!**")
           .setDescription("If no-one guess the word, the contest will disband after 1 minute.")
           .addField("__Your scrambled word is__:", word.split('').sort(function(){return 0.5-Math.random()}).join(''))
