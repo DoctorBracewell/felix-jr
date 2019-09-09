@@ -1,106 +1,59 @@
-const tokens = require("./tokens.json"), config = require("./config.json"), prefix = config.prefix
-const Discord = require('discord.js'), discordClient = new Discord.Client(), random = require("drbracewell-random-tools"), fetch = require("node-fetch")
-
-discordClient.on('ready', () => {
-    console.log('Starting Felix Jr.');
-    discordClient.user.setActivity("Inside jokes since '81");
-  });
-
-setInterval(() => {
-    let num = random.randomBetween(0, 1000);
-    if (num === 1) {
-        discordClient.guilds.get("612778224887267342").channels.get("618186163353813019").send(random.randomFromArray(config.jokes))
-    }
-}, 1000)
-
-discordClient.on('guildMemberAdd', member => {
-  member.guild.channels.get('612778224887267344').send(`Welcome <@${member.id}>! Check out <#612813188077191199>. When you're ready, post in <#612779316438237211> and <#612800612752424961>. Have any questions? Ask around or tag a mod, and let a mod (name in purple writing) know if you have pronouns you want added to your name or a colour. Enjoy!`); 
-});
-
-discordClient.on('message', message => {
-    if (message.content.toLowerCase() === `${prefix}ping`) {
-        message.channel.send("Pong!")
-    }
-
-    if (!message.author.bot && message.channel.id == "618186163353813019") {
-        if (message.content.toLowerCase().includes("vitamin")) {
-            message.channel.send("What the FUCK is a vitamin.")
-        } if (message.content.toLowerCase().includes("autocorrect")) {
-            message.channel.send("*autocarrot")
-        } if (message.content.toLowerCase().includes("valid")) {
-            message.channel.send("*vaeleed")
-        } if (message.content.toLowerCase().includes("tree")) {
-            message.channel.send("I am the Lorax I speak for the trees, save the Amazon or I’ll break your knees.")
-        } if (message.content.toLowerCase().includes("drug")) {
-            message.channel.send("*DRUGS* ARI NO")
-        } if (message.content.toLowerCase().includes("luranixl")) {
-          message.channel.send("***TRIPPY SEXY GODDESSES***")
-        } if (message.content.toLowerCase().includes("blood") && message.content.toLowerCase().includes("cookie")) {
-          message.channel.send("\"No Grey, blood does *not* make the cookies taste better.\"")
-        } if (message.content.toLowerCase().includes("leo")) {
-          message.channel.send("*absolute sweetheart")
-        } if (message.content.toLowerCase().includes("merlin")) {
-          message.channel.send("*baby wizard")
-        } if (message.content.toLowerCase().includes("felix jr")) {
-          message.channel.send("That's Me!")
-        } if (message.content.toLowerCase().includes("bastard")) {
-          message.channel.send("*chaptic bastard*")
-        } if (message.content.toLowerCase().includes("spaghetti")) {
-          message.channel.send("**SPAGHETTI ROMANCE**")
-        }
-    }
-
-    let args = message.content.toLowerCase().slice(prefix.length).split(/ +/);
-    let command = args.shift().toLowerCase();
-
-    if (command === `trivia` && message.channel.id == "618186163353813019") {
-
-        if (args.length == 0) {
+module.exports = {
+  name: 'trivia',
+  description: "Starts a trivia contest.",
+  arguments: "easy medium hard",
+	execute(message, args, Discord) {
+        const content = require("../json/content.json"), random = require("drbracewell-random-tools"), fetch = require("node-fetch")
+        if (args.length === 0) {
           message.channel.send("Please provide a difficulty, `easy`, `medium` or `hard`.");
           return;
          }
-
         // Setup
         let questionNumber = 0, contestants = [], questionEmbed, randomQuestion = {}, randomChoices = [], 
-            shuffledAnswer = 0, choicesString = ``, leaderboard = [], list = [], url = "https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986";
+            shuffledAnswer = 0, choicesString = ``, leaderboard = [], list = []
 
-        
-          if(args.length === 2) {
-            switch (args[0]) {
-              case "easy":
-                url += "&difficulty=easy";
+        if (!(["easy","medium","hard"].includes(args[1])) || args.length < 2) {
+          message.channel.send("That is not a valid contest difficulty, use `easy`, `medium` or `hard`.");
+          return;
+        }
+
+        let url = "https://opentdb.com/api.php?amount=10&type=multiple&encode=url3986";
+        if(args.length === 2) {
+          switch (args[1]) {
+            case "easy":
+              url += "&difficulty=easy";
+              break;
+            case "medium":
+                url += "&difficulty=medium";
                 break;
-              case "medium":
-                  url += "&difficulty=medium";
-                  break;
-              case "hard":
-                  url += "&difficulty=hard";
-                  break;
-            }
+            case "hard":
+                url += "&difficulty=hard";
+                break;
           }
-            // Get api trivia
-          fetch(url)
-            .then(res => res.json())
-            .then(res => {
-              questionsArray = res.results.slice();
+        }
+          // Get api trivia
+        fetch(url)
+          .then(res => res.json())
+          .then(res => {
+            questionsArray = res.results.slice();
 
-              for (let element of questionsArray) {
-                element.question = decodeURIComponent(element.question);
-                element.incorrect_answers.unshift(element.correct_answer);
-                for (i = 0; i < element.incorrect_answers.length; i++) {
-                  element.incorrect_answers[i] = decodeURIComponent(element.incorrect_answers[i]);
-                };
-                let obj = element;
-                obj.answers = obj.incorrect_answers;
-                delete obj.incorrect_answers;
-              }
+            for (let element of questionsArray) {
+              element.question = decodeURIComponent(element.question);
+              element.incorrect_answers.unshift(element.correct_answer);
+              for (i = 0; i < element.incorrect_answers.length; i++) {
+                element.incorrect_answers[i] = decodeURIComponent(element.incorrect_answers[i]);
+              };
+              let obj = element;
+              obj.answers = obj.incorrect_answers;
+              delete obj.incorrect_answers;
+            }
 
-            })
-            .catch(function (error) {
-              console.log(error);
-              message.channel.send("Something went when trying to recieve the questions from the API, please try again.");
-              return;
-            });
+          })
+          .catch(function (error) {
+            console.log(error);
+            message.channel.send("Something went when trying to recieve the questions from the API, please try again.");
+            return;
+          });
         
         // incorrect/correct answers
         let correctAnswers = () => {
@@ -145,7 +98,6 @@ discordClient.on('message', message => {
           questionNumber++;
           questionEmbed = new Discord.RichEmbed()
             .setColor(random.randomColour())
-            .setAuthor("Felix Jr.")
             .setTitle(`**Question ${questionNumber}**:`);
     
           // Question Generation + Shuffling
@@ -222,8 +174,7 @@ discordClient.on('message', message => {
                     setTimeout(() => {
                       message.channel.send(
                         new Discord.RichEmbed()
-                        .setColor("#1a8892")
-                        .setAuthor("Felix Jr.")
+                        .setColor(random.randomColour())
                         .setTitle(`**Contest Results**`)
                         .setDescription("Thanks for participating!")
                         .setFooter("Use $trivia to start another contest.")
@@ -276,7 +227,5 @@ discordClient.on('message', message => {
           console.log(err);
           message.channel.send(`Something went wrong, please try again!`);
         }
-    }
-});
-
-discordClient.login(tokens.discord);
+	}
+};

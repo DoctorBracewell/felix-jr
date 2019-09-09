@@ -1,16 +1,26 @@
 {
-  "name": "virtual-felix",
+  "name": "felix-jr",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "description": "Source code for custom discord.js bot Felix Jr.",
+  "main": "felix-jr.js",
   "dependencies": {
     "discord.js": "^11.5.1",
     "drbracewell-random-tools": "^1.2.2",
-    "node-fetch": "^2.6.0"
-  }
+    "node-fetch": "^2.6.0",
+    "random-word": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoctorBracewell/felix-jr.git"
+  },
+  "author": "DrBracewell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DoctorBracewell/felix-jr/issues"
+  },
+  "homepage": "https://github.com/DoctorBracewell/felix-jr#readme"
 }
