@@ -1,4 +1,4 @@
-src/tokens.json
+src/json/tokens.json
 src/node_modules
 server-push
 start-dev.bat
