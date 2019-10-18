@@ -6,7 +6,7 @@ module.exports = {
         const randomWord = require("random-words"), random = require("drbracewell-random-tools");
         let word = randomWord();
 
-        if (args === [] || !["easy", "hard"].includes(args[0])) {
+        if (args === [] || !["easy", "hard", "extreme"].includes(args[0])) {
           message.channel.send("Please send a valid anagram type; `easy` or `hard`.");
           return;
         }
@@ -23,10 +23,16 @@ module.exports = {
           }
         }
 
+        if (args[0] === "extreme") {
+          while (word.length <= 10) {
+            word = randomWord();
+          }
+        }
+
         let embed = new Discord.RichEmbed()
           .setColor(random.randomColour())
           .setTitle("**Race to see who can unscramble the word below first!**")
-          .setDescription("If no-one guess the word, the contest will disband after 1 minute.")
+          .setDescription("If no-one can guess the word, the contest will disband after 1 minute.")
           .addField("__Your scrambled word is__:", word.split('').sort(function(){return 0.5-Math.random()}).join(''))
           .setFooter("Use $anagram to start another contest!")
           .setTimestamp();

@@ -34,9 +34,7 @@ discordClient.on('message', message => {
   }
 
     if (!message.author.bot && message.channel.id == "618186163353813019") {
-        if (message.content.toLowerCase().includes("vitamin")) {
-            message.channel.send("What the FUCK is a vitamin.")
-        } if (message.content.toLowerCase().includes("autocorrect")) {
+      if (message.content.toLowerCase().includes("autocorrect")) {
             message.channel.send("*autocarrot")
         } if (message.content.toLowerCase().includes("valid")) {
             message.channel.send("*vaeleed")
@@ -52,18 +50,35 @@ discordClient.on('message', message => {
           message.channel.send("*absolute sweetheart")
         } if (message.content.toLowerCase().includes("merlin")) {
           message.channel.send("*baby wizard")
-        } if (message.content.toLowerCase().includes("felix jr")) {
+        } if (message.content.toLowerCase().includes("felix jr") || message.content.toLowerCase().includes("618174290944196649")) {
           message.channel.send("That's Me!")
-        } if (message.content.toLowerCase().includes("bastard")) {
-          message.channel.send("*chaptic bastard*")
         } if (message.content.toLowerCase().includes("spaghetti")) {
           message.channel.send("**SPAGHETTI ROMANCE**")
+        } if (message.content.toLowerCase().includes("i love you")) {
+          message.channel.send("***__HOCKEY HOCKEY MAPLE LEAF PUCK__***")
         }
     }
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
+    let tempArgs = message.content.slice(prefix.length).split(/ +/);
+    let tempCommand = tempArgs.shift()
+
+    if (tempCommand == "eval") {
+      if (message.author.id !== config.ownerID) return;
+
+      try {
+        const code = tempArgs.join(" ");
+        let evaled = eval(code);
+   
+        message.channel.send(evaled);
+
+      } catch (err) {
+        message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      }
+    }
+
     let args = message.content.toLowerCase().slice(prefix.length).split(/ +/);
-    let command = args.shift().toLowerCase();
+    let command = args.shift()
     if (!discordClient.commands.has(command)) return;
 
     try {
